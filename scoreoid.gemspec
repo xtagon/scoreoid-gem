@@ -11,6 +11,8 @@ Gem::Specification.new do |gem|
 	gem.summary = 'Scoreoid Ruby is a wrapper for the Scoreoid API.'
 
 	gem.required_ruby_version = '1.9.2'
+	gem.add_runtime_dependency 'multi_json', '~> 1.3'
+	gem.add_runtime_dependency 'rest-client', '~> 1.6'
 
 	gem.files = `git ls-files`.split($/)
 	gem.executables = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
