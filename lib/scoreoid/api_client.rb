@@ -54,7 +54,7 @@ module Scoreoid
 		def self.countPlayers
 			api_response = self.api_call('countPlayers')
 			json = MultiJson.load(api_response)
-			raise APIError if json.key? 'error'
+			raise APIError, json['error'] if json.key? 'error'
 			json
 		end
 	end

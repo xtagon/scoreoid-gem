@@ -74,7 +74,7 @@ describe Scoreoid::APIClient do
 			
 			expect do
 				Scoreoid::APIClient.countPlayers
-			end.to raise_error Scoreoid::APIError
+			end.to raise_error(Scoreoid::APIError, 'The API key is broken or the game is not active')
 		end
 	end
 end
