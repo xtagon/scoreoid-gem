@@ -37,11 +37,11 @@ module Scoreoid
 
 		# Query the Scoreoid API and return the un-parsed response.
 		# This is used internally and you should only call it if you really know what you're doing.
-		def self.api_call(api_method)
+		def self.api_call(api_method, params={})
 			# Add :response => 'json' to the post parameters because the entire library
 			# epects JSON responses.
-			post_params = self.default_params.merge({response: 'json'})
-			RestClient.post("https://www.scoreoid.com/api/#{api_method}", post_params)
+			params = self.default_params.merge({response: 'json'}).merge(params)
+			RestClient.post("https://www.scoreoid.com/api/#{api_method}", params)
 		end
 
 		# Query the Scoreoid API method "countPlayers()" and parse the response.

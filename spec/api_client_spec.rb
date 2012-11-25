@@ -52,6 +52,19 @@ describe Scoreoid::APIClient do
 			api_response.should be_instance_of String
 			api_response.should == example_response
 		end
+
+		it 'should call Scoreoid API methods with additional parameters' do
+			example_response = %q({"players": 7})
+			default_params = {api_key: 'API_KEY', game_id: 'GAME_ID'}
+			additional_params = {platform: 'Windows'}
+			post_params = default_params.merge(additional_params).merge({response: 'json'})
+
+			Scoreoid::APIClient.stub(:default_params).and_return(default_params)
+			RestClient.stub(:post).and_return(example_response)
+			RestClient.should_receive(:post).with('https://www.scoreoid.com/api/playerCount', post_params)
+
+			Scoreoid::APIClient.api_call('playerCount', additional_params)
+		end
 	end
 
 	describe 'self.countPlayers' do
