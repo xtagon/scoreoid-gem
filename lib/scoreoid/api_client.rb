@@ -37,6 +37,9 @@ module Scoreoid
 
 		# Query the Scoreoid API and return the un-parsed response.
 		# This is used internally and you should only call it if you really know what you're doing.
+		#
+		# @note If you want to query the Scoreoid API manually, you may want to use
+		#    {Scoreoid::APIClient.api_call!} instead, which parses the JSON after.
 		def self.api_call(api_method, params={})
 			# Add :response => 'json' to the post parameters because the entire library
 			# expects JSON responses.
@@ -44,15 +47,13 @@ module Scoreoid
 			RestClient.post("https://www.scoreoid.com/api/#{api_method}", params)
 		end
 
-		# Query the Scoreoid API method "countPlayers()" and parse the response.
-		#
-		# @see Scoreoid::Player.count
+		# Query the Scoreoid API method (`api_method`) and parse the response.
 		#
 		# @raise [Scoreoid::APIError] if the Scoreoid API returns an error response.
 		#
 		# @return [Hash] The Scoreoid API response parsed into a Hash.
-		def self.countPlayers
-			api_response = self.api_call('countPlayers')
+		def self.api_call!(api_method, params={})
+			api_response = self.api_call(api_method, params)
 			json = MultiJson.load(api_response)
 			raise APIError, json['error'] if json.key? 'error'
 			json

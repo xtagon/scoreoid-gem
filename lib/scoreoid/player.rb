@@ -9,7 +9,7 @@ module Scoreoid
 		#    
 		#    puts "This game has #{Scoreoid::Player.count} players!"
 		def self.count
-			Scoreoid::APIClient.countPlayers['players']
+			Scoreoid::APIClient.api_call!('countPlayers')['players']
 		end
 	end
 end

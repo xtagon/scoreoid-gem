@@ -67,20 +67,22 @@ describe Scoreoid::APIClient do
 		end
 	end
 
-	describe 'self.countPlayers' do
-		it 'should call the Scoreoid API method and parse the JSON result into a Hash' do
-			Scoreoid::APIClient.stub(:api_call).and_return(%q({"players":7}))
-			result = Scoreoid::APIClient.countPlayers
+	describe '.api_call!' do
+		it 'should make the API call and parse the JSON response' do
+			params = {platform: 'Windows'}
+			Scoreoid::APIClient.stub(:api_call).and_return(%q({"success": "Example response."}))
+			Scoreoid::APIClient.should_receive(:api_call).with('getScores', params)
+			result = Scoreoid::APIClient.api_call!('getScores', params)
 			result.should be_instance_of Hash
-			result.should == {'players' => 7}
+			result.should == {'success' => "Example response."}
 		end
 
-		it 'should raise an error if the Scoreoid API returns an error' do
+		it 'should raise an error if the Scoreoid API response contains an error' do
 			example_response = %q({"error": "The API key is broken or the game is not active"})
 			Scoreoid::APIClient.stub(:api_call).and_return(example_response)
 			
 			expect do
-				Scoreoid::APIClient.countPlayers
+				Scoreoid::APIClient.api_call!('getScores')
 			end.to raise_error(Scoreoid::APIError, 'The API key is broken or the game is not active')
 		end
 	end
