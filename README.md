@@ -24,6 +24,8 @@ Or install it yourself as:
 Usage
 -----
 
+Full documentation is [available online](http://rubydoc.info/gems/scoreoid/frames).
+
 To get started, configure Scoreoid Ruby with your API key and game ID:
 
     require 'scoreoid'
