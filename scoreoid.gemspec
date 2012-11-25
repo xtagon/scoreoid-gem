@@ -9,6 +9,7 @@ Gem::Specification.new do |gem|
 	gem.author = 'Justin Workman'
 	gem.email = 'xtagon@gmail.com'
 	gem.summary = 'Scoreoid Ruby is a wrapper for the Scoreoid API.'
+	gem.license = 'MIT'
 
 	gem.required_ruby_version = '1.9.2'
 	gem.add_runtime_dependency 'multi_json', '~> 1.3'
