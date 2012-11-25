@@ -1,5 +1,4 @@
-require 'date'
-
+require 'chronic'
 require 'multi_json'
 require 'rest_client'
 
@@ -53,16 +52,25 @@ module Scoreoid
 
 			# Attempt to coerce parameters into formats that the Scoreoid API expects.
 			#
+			# Date parameters will be parsed with Chronic, so you can supply dates in
+			# natural language such as "may 5th 2012" or "1 year ago".
+			#
 			# @param [Hash] params A hash of any parameters you wish to format.
 			#
-			# @option params [Date, Time, String] :start_date
-			# @option params [Date, Time, String] :end_date
+			# @option params [#to_s, #strftime] :start_date
+			# @option params [#to_s, #strftime] :end_date
 			#
 			# @return [Hash] The formatted parameters, ready to use in an API query.
 			def prepare_params(params)
-				params.each do |key, value|
-					if [:start_date, :end_date].include?(key) and value.respond_to?(:strftime)
-						params[key] = value.strftime '%Y-%m-%d'
+				params.each do |key, _|
+					if [:start_date, :end_date].include?(key)
+						if params[key].respond_to? :to_s
+							params[key] = Chronic.parse(params[key].to_s, context: :past)
+						end
+
+						if params[key].respond_to? :strftime
+							params[key] = params[key].strftime '%Y-%m-%d'
+						end
 					end
 				end
 				params

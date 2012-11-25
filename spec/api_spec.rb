@@ -34,8 +34,8 @@ describe Scoreoid::API do
 
 		it 'should format the parameters before sending' do
 			example_response = %q({"players": 7})
-			given_params = {start_date: Date.new(2010, 1, 1), end_date: Date.new(2012, 2, 3).to_time}
-			formatted_params = {start_date: '2010-01-01', end_date: '2012-02-03'}
+			given_params = {start_date: Date.new(2010, 1, 1), end_date: 'december 3rd 2011'}
+			formatted_params = {start_date: '2010-01-01', end_date: '2011-12-03'}
 
 			RestClient.stub(:post).and_return(example_response)
 			RestClient.should_receive(:post).with('https://www.scoreoid.com/api/playerCount', formatted_params)
