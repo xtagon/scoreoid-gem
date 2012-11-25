@@ -25,7 +25,7 @@ Contributing
 Contributions are most welcome!
 
 1. [Fork it on Bitbucket](https://bitbucket.org/xtagon/scoreoid-ruby-gem/fork)
-2. Create your feature branch (`git checkout -b my-new-feature`)
+2. Create your feature branch (`git checkout -b feature/my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
