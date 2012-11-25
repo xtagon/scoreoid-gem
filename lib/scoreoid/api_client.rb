@@ -7,9 +7,14 @@ module Scoreoid
 	# This exception is raised when the Scoreoid API returns an error response.
 	class APIError < StandardError; end
 
+	# A singleton class with methods for calling Scoreoid API methods.
+	# This is used internally, normally you would not be using this class directly.
 	class APIClient
+		# A list of parameters keys which are required for all API calls.
 		REQUIRED_PARAMETERS = [:api_key, :game_id]
 
+		# The default request parameters.
+		# This will be set with the API key and game ID once {Scoreoid.configure} is called.
 		@@default_params = Hash.new
 
 		# Set the default request parameters.

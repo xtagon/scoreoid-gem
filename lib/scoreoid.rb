@@ -2,6 +2,7 @@ require 'scoreoid/version'
 require 'scoreoid/api_client'
 require 'scoreoid/player'
 
+# The main Scoreoid Ruby namespace.
 module Scoreoid
 	# This exception is raised when Scoreoid Ruby is used without first being configured.
 	# To configure Scoreoid Ruby, see {Scoreoid.configure}.
