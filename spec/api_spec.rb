@@ -13,6 +13,19 @@ describe Scoreoid::API do
 			api_response.should be_instance_of String
 			api_response.should == example_response
 		end
+
+		it 'should use default params if they are set' do
+			example_response = %q({"players": 7})
+			default_params = {api_key: 'API_KEY', game_id: 'GAME_ID'}
+			given_params = {start_date: '2009-01-01'}
+			expected_params = default_params.merge(given_params)
+
+			RestClient.stub(:post).and_return(example_response)
+			RestClient.should_receive(:post).with('https://www.scoreoid.com/api/playerCount', expected_params)
+
+			Scoreoid.configure(default_params)
+			Scoreoid::API.query('playerCount', given_params)
+		end
 	end
 
 	describe '.query_and_parse' do
