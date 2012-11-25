@@ -12,6 +12,10 @@ module Scoreoid
 		class << self
 			# Query a given Scoreoid API method and return the repsonse as a string.
 			#
+			# Supplied parameters will be prepared with {.prepare_params} before sending.
+			# This is so that you can, for example,  supply a Date object for :start_date
+			# even though the Scoreoid API expects it to be a string formatted as "YYYY-MM-DD".
+			#
 			# @param [String] api_method The Scoreoid API method to query
 			# @param [Hash] params Parameters to include in the API request
 			#
@@ -36,7 +40,6 @@ module Scoreoid
 			# @return [Hash] The Scoreoid API response parsed into a Hash.
 			#
 			# @see .query
-			# @see .prepare_params
 			def query_and_parse(api_method, params={})
 				params = params.merge(response: 'json')
 
