@@ -1,6 +1,11 @@
 require 'spec_helper'
 
 describe Scoreoid::API do
+	before :each do
+		# Tests should be run independantly, so I don't understand why this is neccessary :/
+		Scoreoid.configure({})
+	end
+
 	describe '.query' do
 		it 'should query a Scoreoid API method and return the response as a string' do
 			example_response = %q({"players": 7})
@@ -26,6 +31,17 @@ describe Scoreoid::API do
 			Scoreoid.configure(default_params)
 			Scoreoid::API.query('playerCount', given_params)
 		end
+
+		it 'should format the parameters before sending' do
+			example_response = %q({"players": 7})
+			given_params = {start_date: Date.new(2010, 1, 1), end_date: Date.new(2012, 2, 3).to_time}
+			formatted_params = {start_date: '2010-01-01', end_date: '2012-02-03'}
+
+			RestClient.stub(:post).and_return(example_response)
+			RestClient.should_receive(:post).with('https://www.scoreoid.com/api/playerCount', formatted_params)
+
+			Scoreoid::API.query('playerCount', given_params)
+		end
 	end
 
 	describe '.query_and_parse' do
@@ -49,16 +65,6 @@ describe Scoreoid::API do
 			expect do
 				Scoreoid::API.query_and_parse('getScores')
 			end.to raise_error(Scoreoid::APIError, 'The API key is broken or the game is not active')
-		end
-
-		it 'should format the parameters before sending' do
-			original_params = {start_date: Date.new(2010, 1, 1), end_date: Date.new(2012, 2, 3).to_time}
-			formatted_params = {start_date: '2010-01-01', end_date: '2012-2-3'}
-
-			Scoreoid::API.stub(:query).and_return(%q({"players": 7}))
-			Scoreoid::API.stub(:prepare_params).and_return(formatted_params)
-			Scoreoid::API.should_receive(:prepare_params).with(original_params)
-			Scoreoid::API.query_and_parse('countPlayers', original_params)
 		end
 	end
 end

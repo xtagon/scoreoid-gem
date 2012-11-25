@@ -19,15 +19,14 @@ module Scoreoid
 			#
 			# @see .query_and_parse
 			def query(api_method, params={})
+				params = self.prepare_params(params)
 				params.merge!(self.default_params ||= {})
 				RestClient.post("https://www.scoreoid.com/api/#{api_method}", params)
 			end
 
 			# Query a given Scoreoid API method and parse the JSON response.
 			#
-			# The response type is set to 'json' for you. Other parameters are filtered
-			# through {.prepare_params} before querying. This, for example, allows you
-			# to use Date or Time objects where a "YYYY-MM-DD" string is expected.
+			# The response type is set to 'json' for you automatically.
 			#
 			# @param [String] api_method The Scoreoid API method to query
 			# @param [Hash] params Parameters to include in the API request.
@@ -39,7 +38,6 @@ module Scoreoid
 			# @see .query
 			# @see .prepare_params
 			def query_and_parse(api_method, params={})
-				params = self.prepare_params(params)
 				params = params.merge(response: 'json')
 
 				api_response = self.query(api_method, params)
