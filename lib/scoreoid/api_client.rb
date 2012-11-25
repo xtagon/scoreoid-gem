@@ -2,6 +2,9 @@ require 'multi_json'
 require 'rest_client'
 
 module Scoreoid
+	# This exception is raised when the Scoreoid API returns an error response.
+	class APIError < StandardError; end
+
 	class APIClient
 		REQUIRED_PARAMETERS = [:api_key, :game_id]
 
@@ -43,12 +46,16 @@ module Scoreoid
 
 		# Query the Scoreoid API method "countPlayers()" and parse the response.
 		#
-		# @see {Scoreoid::Player.count}
+		# @see Scoreoid::Player.count
+		#
+		# @raise [Scoreoid::APIError] if the Scoreoid API returns an error response.
 		#
 		# @return [Hash] The Scoreoid API response parsed into a Hash.
 		def self.countPlayers
 			api_response = self.api_call('countPlayers')
-			MultiJson.load(api_response)
+			json = MultiJson.load(api_response)
+			raise APIError if json.key? 'error'
+			json
 		end
 	end
 end

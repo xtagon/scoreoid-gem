@@ -67,5 +67,14 @@ describe Scoreoid::APIClient do
 			result.should be_instance_of Hash
 			result.should == {'players' => 7}
 		end
+
+		it 'should raise an error if the Scoreoid API returns an error' do
+			example_response = %q({"error": "The API key is broken or the game is not active"})
+			Scoreoid::APIClient.stub(:api_call).and_return(example_response)
+			
+			expect do
+				Scoreoid::APIClient.countPlayers
+			end.to raise_error Scoreoid::APIError
+		end
 	end
 end
