@@ -39,7 +39,7 @@ module Scoreoid
 		# This is used internally and you should only call it if you really know what you're doing.
 		def self.api_call(api_method, params={})
 			# Add :response => 'json' to the post parameters because the entire library
-			# epects JSON responses.
+			# expects JSON responses.
 			params = self.default_params.merge({response: 'json'}).merge(params)
 			RestClient.post("https://www.scoreoid.com/api/#{api_method}", params)
 		end
