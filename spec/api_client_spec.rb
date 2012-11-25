@@ -68,13 +68,7 @@ describe Scoreoid::APIClient do
 	end
 
 	describe 'self.countPlayers' do
-		it 'should call the countPlayers() Scoreoid API method' do
-			Scoreoid::APIClient.stub(:api_call).and_return(%q({"players":7}))
-			Scoreoid::APIClient.should_receive(:api_call).with('countPlayers')
-			Scoreoid::APIClient.countPlayers
-		end
-
-		it 'should parse the JSON result into a Hash' do
+		it 'should call the Scoreoid API method and parse the JSON result into a Hash' do
 			Scoreoid::APIClient.stub(:api_call).and_return(%q({"players":7}))
 			result = Scoreoid::APIClient.countPlayers
 			result.should be_instance_of Hash
