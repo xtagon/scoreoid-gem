@@ -1,3 +1,5 @@
+require 'date'
+
 require 'multi_json'
 require 'rest_client'
 
@@ -47,12 +49,19 @@ module Scoreoid
 			RestClient.post("https://www.scoreoid.com/api/#{api_method}", params)
 		end
 
-		# Query the Scoreoid API method (`api_method`) and parse the response.
+		# Query a Scoreoid API method and parse the response.
 		#
 		# @raise [Scoreoid::APIError] if the Scoreoid API returns an error response.
 		#
 		# @return [Hash] The Scoreoid API response parsed into a Hash.
 		def self.api_call!(api_method, params={})
+			# Convert Date parameters into a format that Scoreoid's API expects.
+			params.each do |key, value|
+				if [:start_date, :end_date].include?(key) and value.respond_to?(:strftime)
+					params[key] = value.strftime '%Y-%m-%d'
+				end
+			end
+
 			api_response = self.api_call(api_method, params)
 			json = MultiJson.load(api_response)
 			raise APIError, json['error'] if json.key? 'error'

@@ -85,5 +85,13 @@ describe Scoreoid::APIClient do
 				Scoreoid::APIClient.api_call!('getScores')
 			end.to raise_error(Scoreoid::APIError, 'The API key is broken or the game is not active')
 		end
+
+		it 'should properly format date parameters when they are Date or Time objects' do
+			original_params = {start_date: Date.new(2010, 1, 1), end_date: Date.new(2012, 2, 3).to_time}
+			formatted_params = {start_date: '2010-01-01', end_date: '2012-02-03'}
+			Scoreoid::APIClient.stub(:api_call).and_return(%q({"players": 7}))
+			Scoreoid::APIClient.should_receive(:api_call).with('countPlayers', formatted_params)
+			Scoreoid::APIClient.api_call!('countPlayers', original_params)
+		end
 	end
 end
