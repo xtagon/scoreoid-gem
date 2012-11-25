@@ -1,20 +1,28 @@
 require 'scoreoid/version'
-require 'scoreoid/api_client'
+require 'scoreoid/api'
 require 'scoreoid/player'
 
+# The main Scoreoid Ruby namespace.
+#
+# To get started, set your Scoreoid API key and game ID with {Scoreoid.configure}.
+# Then you can use {Scoreoid::API.query_and_parse} to query any Scoreoid API method.
+# See the {http://wiki.scoreoid.net/category/api/ Scoreoid Wiki} for information
+# on available API methods.
 module Scoreoid
-	# This exception is raised when Scoreoid Ruby is used without first being configured.
-	# To configure Scoreoid Ruby, see {Scoreoid.configure}.
-	class NotConfiguredError < RuntimeError; end
-
-	# Configure Scoreoid Ruby with your Scoreoid API key and game ID.
-	# This must be done once before calling any Scoreoid API methods.
+	# Configure Scoreoid Ruby by setting default API request parameters.
+	# You can set any parameters here, but it is only recommended to set
+	# :api_key and :game_id as they are common to all API methods.
 	#
-	# @example
-	#    Scoreoid.configure(ENV['SCOREOID_API_KEY'], ENV['SCOREOID_GAME_ID'])
+	# @example Setting your API key and game ID from environment variables:
+	#    Scoreoid.configure(api_key: ENV['SCOREOID_API_KEY'], game_id: ENV['SCOREOID_GAME_ID'])
 	#
-	# @return [Hash] A hash of the parameters you just configured.
-	def self.configure(api_key, game_id)
-		Scoreoid::APIClient.default_params = {api_key: api_key, game_id: game_id}
+	# @param [Hash] params A hash of default parameters to set
+	#
+	# @option params [String] :api_key Your Scoreoid API key
+	# @option params [String] :game_id Your Scoreoid game ID
+	#
+	# @return [Hash] The parameters you just set
+	def self.configure(params)
+		Scoreoid::API.default_params = params
 	end
 end

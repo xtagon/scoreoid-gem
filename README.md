@@ -19,13 +19,30 @@ Or install it yourself as:
 
     $ gem install scoreoid
 
+Usage
+-----
+
+To get started, configure Scoreoid Ruby with your API key and game ID:
+
+    require 'scoreoid'
+    
+    Scoreoid.configure(api_key: 'YOUR_API_KEY', game_id: 'YOUR_GAME_ID')
+
+Then you can start querying Scoreoid API methods:
+
+    new_players_count = Scoreoid::API.query('countPlayers', start_date: '2009-08-04')
+
+Any Scoreoid API method may be called in this mannor. See the [Scoreoid Wiki](http://wiki.scoreoid.net/category/api/) for information on available API methods.
+
+Future versions of Scoreoid Ruby will provide a more object-oriented mannor of querying data. See the `Scoreoid::Player` class for a basic example of this.
+
 Contributing
 ------------
 
 Contributions are most welcome!
 
 1. [Fork it on Bitbucket](https://bitbucket.org/xtagon/scoreoid-ruby-gem/fork)
-2. Create your feature branch (`git checkout -b my-new-feature`)
+2. Create your feature branch (`git checkout -b feature/my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request

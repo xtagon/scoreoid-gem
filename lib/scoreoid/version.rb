@@ -1,3 +1,4 @@
 module Scoreoid
-	VERSION = '0.1.0'
+	# The currently loaded Scoreoid Ruby version.
+	VERSION = '1.0.0'
 end
