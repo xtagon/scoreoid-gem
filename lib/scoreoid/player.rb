@@ -2,14 +2,22 @@ require 'scoreoid/api_client'
 
 module Scoreoid
 	class Player
-		# @return [Integer] The total number of players for the game.
+		# Get the number of players for the game.
 		#
-		# @example
-		#    Scoreoid.configure 'YOUR_API_KEY', 'YOUR_GAME_ID'
-		#    
-		#    puts "This game has #{Scoreoid::Player.count} players!"
-		def self.count
-			Scoreoid::APIClient.api_call!('countPlayers')['players']
+		# @example Count the total number of players
+		#    puts "This game has #{Scoreoid::Player.count} total players."
+		#
+		# @example Count new players
+		#    count = Scoreoid::Player.count(start_date: '2012-11-01')
+		#    puts "There are #{count} new players since 2012-11-01."
+		#
+		# @param [Hash] criteria Optional criteria for counting players.
+		# @option criteria [String] :start_date Start date (YYYY-MM-DD)
+		# @option criteria [String] :end_date End date (YYYY-MM-DD)
+		#
+		# @return [Integer] The number of players.
+		def self.count(criteria={})
+			Scoreoid::APIClient.api_call!('countPlayers', criteria)['players']
 		end
 	end
 end
