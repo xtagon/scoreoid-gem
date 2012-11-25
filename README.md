@@ -1,7 +1,8 @@
 Scoreoid Ruby
 =============
 
-Scoreoid Ruby is a wrapper for the Scoreoid API.
+Scoreoid Ruby is a wrapper for the Scoreoid API. It is in the early development stages,
+with plans to support all Scoreoid API methods.
 
 Installation
 ------------
@@ -21,11 +22,15 @@ Or install it yourself as:
 Contributing
 ------------
 
+Contributions are most welcome!
+
 1. [Fork it on Bitbucket](https://bitbucket.org/xtagon/scoreoid-ruby-gem/fork)
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
+
+Please use the [issue tracker](https://bitbucket.org/xtagon/scoreoid-ruby-gem/issues?status=new&status=open) if you encounter a bug or have a feature request.
 
 License
 -------
