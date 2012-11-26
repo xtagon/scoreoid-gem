@@ -30,4 +30,17 @@ describe Scoreoid::Player do
 			response.should == success_response
 		end
 	end
+
+	describe '.edit' do
+		it 'should edit the player and return the parsed API response' do
+			success_response = {'success' => ['The player has been updated']}
+			params = {username: 'AzureDiamond', password: '*******'}
+
+			Scoreoid::API.stub(:query_and_parse).and_return(success_response)
+			Scoreoid::API.should_receive(:query_and_parse).with('editPlayer', params)
+
+			response = Scoreoid::Player.edit(params)
+			response.should == success_response
+		end
+	end
 end
