@@ -1,6 +1,11 @@
 Scoreoid Ruby Change Log
 ========================
 
+2012-11-25 *v1.1.1*
+-------------------
+
+- Fix a issue that occured when parsing API responses where the root node is an array.
+
 2012-11-25 *v1.1.0*
 -------------------
 
