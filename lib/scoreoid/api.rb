@@ -9,6 +9,11 @@ module Scoreoid
 	# A singleton class with methods for querying the Scoreoid API.
 	class API
 		class << self
+			# Default API request parameters used by {.query}
+			#
+			# This would normally be set with {Scoreoid.configure}
+			attr_accessor :default_params
+
 			# Query a given Scoreoid API method and return the repsonse as a string.
 			#
 			# Supplied parameters will be prepared with {.prepare_params} before sending.
@@ -89,11 +94,6 @@ module Scoreoid
 				end
 				params
 			end
-
-			# Default API request parameters used by {.query}
-			#
-			# This would normally be set with {Scoreoid.configure}
-			attr_accessor :default_params
 		end
 	end
 end
