@@ -54,10 +54,13 @@ module Scoreoid
 					api_response.sub!(/\]\Z/, '') # Remove trailing bracket
 				end
 
+				# Parse the response
 				parsed_result = MultiJson.load(api_response)
 
+				# Raise an error if the response JSON contained one
 				raise APIError, parsed_result['error'] if parsed_result.key? 'error'
 
+				# Return the parsed result
 				parsed_result
 			end
 
