@@ -35,10 +35,13 @@ To get started, configure Scoreoid Ruby with your API key and game ID:
 Then you can start querying Scoreoid API methods:
 
     new_players_count = Scoreoid::API.query('countPlayers', start_date: '2009-08-04')
+	new_players_count['players'] # => 34
 
-Any Scoreoid API method may be called in this mannor. See the [Scoreoid Wiki](http://wiki.scoreoid.net/category/api/) for information on available API methods.
+Any Scoreoid API method may be called in this manner. See the [Scoreoid Wiki](http://wiki.scoreoid.net/category/api/) for information on available API methods.
 
-Future versions of Scoreoid Ruby will provide a more object-oriented mannor of querying data. See the `Scoreoid::Player` class for a basic example of this.
+Future versions of Scoreoid Ruby will provide a more object-oriented manner of querying data. Then it will look more like this:
+
+    Player.count # => 34
 
 Contributing
 ------------
