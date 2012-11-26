@@ -41,7 +41,7 @@ Any Scoreoid API method may be called in this manner. See the [Scoreoid Wiki](ht
 
 Future versions of Scoreoid Ruby will provide a more object-oriented manner of querying data. Then it will look more like this:
 
-    Player.count # => 34
+    Scoreoid::Player.count # => 34
 
 Contributing
 ------------
