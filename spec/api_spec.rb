@@ -66,5 +66,14 @@ describe Scoreoid::API do
 				Scoreoid::API.query_and_parse('getScores')
 			end.to raise_error(Scoreoid::APIError, 'The API key is broken or the game is not active')
 		end
+
+		it 'should not raise an error if the the response is an array' do
+			example_response = %q([{"Player": {"username": "pwner"}}])
+			Scoreoid::API.stub(:query).and_return(example_response)
+
+			expect do
+				Scoreoid::API.query_and_parse('getPlayer', username: 'someuser')
+			end.to_not raise_error
+		end
 	end
 end
