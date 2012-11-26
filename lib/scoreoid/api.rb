@@ -35,14 +35,25 @@ module Scoreoid
 			# @param [Hash] params Parameters to include in the API request.
 			#
 			# @raise [Scoreoid::APIError] if the Scoreoid API returns an error response.
+			# @raise [MultiJson::DecodeError] if the Scoreoid API response can't be parsed
+			#    (report a bug if this happens!)
 			#
 			# @return [Hash] The Scoreoid API response parsed into a Hash.
 			#
 			# @see .query
 			def query_and_parse(api_method, params={})
+				# We're gonna parse JSON, so ask for JSON
 				params = params.merge(response: 'json')
 
+				# Query Scoreoid
 				api_response = self.query(api_method, params)
+
+				# Fix for API responses that return arrays (they can't be parsed by MultiJson)
+				if api_response =~ /\A\[/ and api_response =~ /\]\Z/
+					api_response.sub!(/\A\[/, '') # Remove leading bracket
+					api_response.sub!(/\]\Z/, '') # Remove trailing bracket
+				end
+
 				parsed_result = MultiJson.load(api_response)
 
 				raise APIError, parsed_result['error'] if parsed_result.key? 'error'
