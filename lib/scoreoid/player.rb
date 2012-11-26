@@ -134,5 +134,26 @@ module Scoreoid
 		def self.edit(params={})
 			Scoreoid::API.query_and_parse('editPlayer', params)
 		end
+
+		# Updates a players field.
+		#
+		# @example Update John's e-mail address
+		#    Scoreoid::Player.update_field(username: 'john', field: 'email', value: 'john@example.com')
+		#
+		# @param [Hash] params Parameters to include in the API request.
+		#    Default parameters set with {Scoreoid.configure} will be included for you.
+		#
+		# @option params [String] :api_key Your Scoreoid API key
+		# @option params [String] :game_id The game ID
+		# @option params [String] :username The player's username (required)
+		# @option params [String] :field The field name to update (see {.edit})
+		# @option params [String] :value The value to set
+		#
+		# @raise [Scoreoid::APIError] if the field could not be updated
+		#
+		# @return [Hash] The API response from Scoreoid (should contain a success message)
+		def self.update_field(params={})
+			Scoreoid::API.query_and_parse('updatePlayerField', params)
+		end
 	end
 end

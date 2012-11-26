@@ -43,4 +43,17 @@ describe Scoreoid::Player do
 			response.should == success_response
 		end
 	end
+
+	describe '.update_field' do
+		it 'should update the player field and return the parsed API response' do
+			success_response = {'success' => ['The player field last_name has been updated']}
+			params = {username: 'john', field: 'last_name', value: 'Doe'}
+
+			Scoreoid::API.stub(:query_and_parse).and_return(success_response)
+			Scoreoid::API.should_receive(:query_and_parse).with('updatePlayerField', params)
+
+			response = Scoreoid::Player.update_field(params)
+			response.should == success_response
+		end
+	end
 end
