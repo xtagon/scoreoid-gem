@@ -12,6 +12,7 @@ Gem::Specification.new do |gem|
 	gem.license = 'MIT'
 
 	gem.required_ruby_version = '1.9.2'
+	gem.add_runtime_dependency 'chronic', '~> 0.8.0'
 	gem.add_runtime_dependency 'multi_json', '~> 1.3'
 	gem.add_runtime_dependency 'rest-client', '~> 1.6'
 

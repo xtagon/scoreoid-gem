@@ -1,8 +1,10 @@
 Scoreoid Ruby
 =============
 
-Scoreoid Ruby is a wrapper for the Scoreoid API. It is in the early development stages,
-with plans to support all Scoreoid API methods.
+Summary
+-------
+
+Scoreoid Ruby is a wrapper for the [Scoreoid](https://www.scoreoid.com/) API.
 
 Installation
 ------------
@@ -21,6 +23,8 @@ Or install it yourself as:
 
 Usage
 -----
+
+Full documentation is [available online](http://rubydoc.info/gems/scoreoid/frames).
 
 To get started, configure Scoreoid Ruby with your API key and game ID:
 
