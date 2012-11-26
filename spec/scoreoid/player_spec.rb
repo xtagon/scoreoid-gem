@@ -17,4 +17,17 @@ describe Scoreoid::Player do
 			count.should == 7
 		end
 	end
+
+	describe '.create' do
+		it 'should create the player and return the parsed API response' do
+			success_response = {'success' => ['The player has been created']}
+			params = {username: 'AzureDiamond', password: 'hunter2'}
+
+			Scoreoid::API.stub(:query_and_parse).and_return(success_response)
+			Scoreoid::API.should_receive(:query_and_parse).with('createPlayer', params)
+
+			response = Scoreoid::Player.create(params)
+			response.should == success_response
+		end
+	end
 end
