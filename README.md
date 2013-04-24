@@ -1,10 +1,10 @@
 Scoreoid Ruby
 =============
 
+[![Build Status](https://travis-ci.org/xtagon/scoreoid-gem.png)](https://travis-ci.org/xtagon/scoreoid-gem)
+
 Summary
 -------
-
-[![Build Status](https://travis-ci.org/xtagon/scoreoid-gem.png)](https://travis-ci.org/xtagon/scoreoid-gem)
 
 Scoreoid Ruby is a wrapper for the [Scoreoid][1] API.
 
@@ -13,15 +13,21 @@ Installation
 
 Add this line to your application's Gemfile:
 
-    gem 'scoreoid'
+``` ruby
+gem 'scoreoid'
+```
 
 And then execute:
 
-    $ bundle
+``` shell
+$ bundle
+```
 
 Or install it yourself as:
 
-    $ gem install scoreoid
+``` shell
+$ gem install scoreoid
+```
 
 Usage
 -----
@@ -30,20 +36,26 @@ Full documentation is [available online][2].
 
 To get started, configure Scoreoid Ruby with your API key and game ID:
 
-    require 'scoreoid'
-    
-    Scoreoid.configure(api_key: 'YOUR_API_KEY', game_id: 'YOUR_GAME_ID')
+``` ruby
+require 'scoreoid'
+
+Scoreoid.configure(api_key: 'YOUR_API_KEY', game_id: 'YOUR_GAME_ID')
+```
 
 Then you can start querying Scoreoid API methods:
 
-    new_players_count = Scoreoid::API.query('countPlayers', start_date: '2009-08-04')
-	new_players_count['players'] # => 34
+``` ruby
+new_players_count = Scoreoid::API.query('countPlayers', start_date: '2009-08-04')
+new_players_count['players'] # => 34
+```
 
 Any Scoreoid API method may be called in this manner. See the [Scoreoid Wiki][3] for information on available API methods.
 
 Future versions of Scoreoid Ruby will provide a more object-oriented manner of querying data. Then it will look more like this:
 
-    Scoreoid::Player.count # => 34
+``` ruby
+Scoreoid::Player.count # => 34
+```
 
 Contributing
 ------------
