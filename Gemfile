@@ -2,5 +2,8 @@ source 'https://rubygems.org'
 
 gemspec
 
-gem 'rspec', '~> 2.12'
-gem 'yard', '~> 0.8.3'
+group :development do
+	gem 'rspec', '~> 2.12'
+	gem 'yard', '~> 0.8.3'
+	gem 'travis-lint'
+end
