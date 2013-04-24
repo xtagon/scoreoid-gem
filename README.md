@@ -4,6 +4,8 @@ Scoreoid Ruby
 Summary
 -------
 
+[![Build Status](https://travis-ci.org/xtagon/scoreoid-gem.png)](https://travis-ci.org/xtagon/scoreoid-gem)
+
 Scoreoid Ruby is a wrapper for the [Scoreoid][1] API.
 
 Installation
