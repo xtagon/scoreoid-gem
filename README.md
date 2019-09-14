@@ -1,3 +1,7 @@
+## NOTICE: Project is unmaintained because the Scoroid API no longer exists.
+
+This repository is left for historical reasons.
+
 Scoreoid Ruby
 =============
 
